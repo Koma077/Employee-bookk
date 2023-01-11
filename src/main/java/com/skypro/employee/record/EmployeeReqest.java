@@ -7,6 +7,7 @@ public class EmployeeReqest {
     private int salary;
     private double avgGrade;
 
+
     public double getAvgGrade() {
         return avgGrade;
     }
