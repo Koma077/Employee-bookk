@@ -1,0 +1,61 @@
+### Поиск всех сотрудников
+GET http://localhost:8080/employees
+### Сотрудник 1
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+  "firstName": "Text",
+  "lastName": "Text",
+  "department": 1,
+  "salary": 1000
+}
+
+### Сотрудник 2
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+  "firstName": "Text1",
+  "lastName": "Text1",
+  "department": 2,
+  "salary": 2000
+}
+
+### Сотрудник 3
+POST http://localhost:8080/employees
+Content-Type: application/json
+
+{
+  "firstName": "Text2",
+  "lastName": "Text2",
+  "department": 3,
+  "salary": 3000
+}
+
+### Получение суммы зарплат сотрудников
+GET http://localhost:8080/employees/salary/sum
+
+### Получение сотрудника с минимальной зарплатой
+GET http://localhost:8080/employees/salary/min
+
+### Получение сотрудника с максимальной зарплатой
+GET http://localhost:8080/employees/salary/max
+
+### Получение всех сотрудников, зарплата которых больше средней зарплаты
+GET http://localhost:8080/employees/high-salary
+
+### Возвращает список сотрудников по департаменту.
+GET http://localhost:8080/department/{id}/employees
+
+### Возвращает сумму зарплат по департаменту.
+GET http://localhost:8080/department/{id}/salary/sum
+
+### Возвращает максимальную зарплату по департаменту.
+GET http://localhost:8080/department/{id}/salary/max
+
+### Возвращает минимальную зарплату по департаменту.
+GET http://localhost:8080/department/{id}/salary/min
+
+### Возвращает сотрудников сгруппированых по отделам в виде Map<Integer,List<Employees>> где ключ - это номер отдела, а значение - список сотрудников данного отдела.
+GET http://localhost:8080/department/employees
