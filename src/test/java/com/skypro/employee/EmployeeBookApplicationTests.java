@@ -11,7 +11,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.SimpleTimeZone;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -20,7 +23,6 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class EmployeeBookApplicationTests {
 
-    @ExtendWith(MockitoExtension.class)
     @Mock
     private Employee employee;
 
@@ -48,9 +50,9 @@ class EmployeeBookApplicationTests {
     }
 
     @Test
-    public void shouldThrowIllegalNameExceptionWhenIllegalName(){
+    public void shouldThrowIllegalNameExceptionWhenIllegalName() {
         EmployeeReqest badEmployee = new EmployeeReqest();
-        badEmployee.setFirstName("zxc");
+        badEmployee.setFirstName();
         badEmployee.setLastName();
         badEmployee.setDepartment(1);
         badEmployee.setSalary(10000);
@@ -61,10 +63,10 @@ class EmployeeBookApplicationTests {
     }
 
     @Test
-    public void shouldReturnNewEmployeeWhenAddEmployee(){
+    public void shouldReturnNewEmployeeWhenAddEmployee() {
         final Employee actual = employee;
         EmployeeReqest employee = new EmployeeReqest();
-        employee.setFirstName(actual.getFirstName());
+        employee.setFirstName();
         employee.setLastName();
         employee.setDepartment(actual.getDepartment());
         employee.setSalary(actual.getSalary());
@@ -76,11 +78,37 @@ class EmployeeBookApplicationTests {
     }
 
     @Test
-    public void shouldReturnRightSum(){
+    public void shouldReturnRightSum() {
         final int actual = actualEmployee.stream().mapToInt(Employee::getSalary).sum();
         final int exprcted = employeeService.getSalarySum();
 
         assertEquals(actual, exprcted);
     }
+
+    @Test
+    public void shouldReturnSalaryEmployeeWithMinSalary() {
+        final Employee actual = actualEmployee.stream().min(Comparator.comparingInt(Employee::getSalary)).get();
+        final Employee expected = employeeService.findMinSalary();
+
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void shouldReturnSalaryEmployeeWithMaxSalary() {
+        final Employee actual = actualEmployee.stream().min(Comparator.comparingInt(Employee::getSalary)).get();
+        final Employee expected = employeeService.findMaxSalary();
+
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void shouldReturnSalaryEmployeeWithAverageSalary() {
+        final int average = actualEmployee.stream().mapToInt(Employee::getSalary).sum() / actualEmployee.size();
+        final List<Employee> expected = actualEmployee.stream().filter(e -> e.getSalary() > average).collect(Collectors.toList());
+        final List<Employee> actual = employeeService.findAverageSalary();
+
+        assertEquals(expected, actual);
+    }
+
 
 }

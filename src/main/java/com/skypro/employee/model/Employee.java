@@ -4,7 +4,7 @@ public class Employee {
     private static int counter;
     private final int id;
     private final String firstName;
-    public final String lastName;
+    private final String lastName;
     private final int department;
     private final int salary;
     private final double avgGrade;

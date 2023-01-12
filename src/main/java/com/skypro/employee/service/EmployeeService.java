@@ -12,16 +12,16 @@ import java.util.stream.Collectors;
 public class EmployeeService {
     private final Map<Integer, Employee> employees = new HashMap<>();
 
-    public Collection<Employee> getAllEmployees(){
+    public Collection<Employee> getAllEmployees() {
         return this.employees.values();
     }
 
     public Employee addEmployee(EmployeeReqest employeeReqest) {
-        if (employeeReqest.getFirstName(StringUtils.capitalize(employeeReqest.setLastName())) == null || employeeReqest.getLastName(StringUtils.capitalize(employeeReqest.setLastName())) == null) {
+        if (employeeReqest.getFirstName() == null || employeeReqest.getLastName() == null) {
             throw new IllegalArgumentException("Error");
         }
-        Employee employee = new Employee(employeeReqest.getLastName(StringUtils.capitalize(employeeReqest.setLastName())),
-                employeeReqest.getFirstName(StringUtils.capitalize(employeeReqest.setLastName())),
+        Employee employee = new Employee(employeeReqest.getLastName(),
+                employeeReqest.getFirstName(),
                 employeeReqest.getDepartment(),
                 employeeReqest.getSalary(),
                 employeeReqest.getAvgGrade());
@@ -29,17 +29,20 @@ public class EmployeeService {
         return employee;
     }
 
-    public int getSalarySum(){
-        return employees.values().stream().mapToInt(e->e.getSalary()).sum();
+    public int getSalarySum() {
+        return employees.values().stream().mapToInt(e -> e.getSalary()).sum();
     }
+
     public Employee findMinSalary() {
-        return employees.values().stream().min(Comparator.comparing(e->e.getSalary())).orElseThrow(IllegalArgumentException::new);
+        return employees.values().stream().min(Comparator.comparing(e -> e.getSalary())).orElseThrow(IllegalArgumentException::new);
     }
-    public Employee findMaxSalary(){
-        return employees.values().stream().max(Comparator.comparing(e->e.getSalary())).orElseThrow(IllegalArgumentException::new);
+
+    public Employee findMaxSalary() {
+        return employees.values().stream().max(Comparator.comparing(e -> e.getSalary())).orElseThrow(IllegalArgumentException::new);
     }
-    public List<Employee> findAverageSalary(){
-        return employees.values().stream().filter(e->e.getSalary() > 2000 && e.getAvgGrade() < 1500).collect(Collectors.toList());
+
+    public List<Employee> findAverageSalary() {
+        return employees.values().stream().filter(e -> e.getSalary() > 2000 && e.getAvgGrade() < 1500).collect(Collectors.toList());
     }
 
 }

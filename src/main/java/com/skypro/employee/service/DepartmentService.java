@@ -23,26 +23,26 @@ public class DepartmentService {
         this.employeeService = employeeService;
     }
 
-    public Set<Integer> getExistingDepartments(){
+    public Set<Integer> getExistingDepartments() {
         return employeeService.getAllEmployees().stream().map(Employee::getDepartment).collect(Collectors.toSet());
     }
 
-    public List<Employee> getEmployeesFromDepartment(int departmentId){
+    public List<Employee> getEmployeesFromDepartment(int departmentId) {
         return employeeService.getAllEmployees().stream().filter(employee -> employee.getDepartment() == departmentId).collect(Collectors.toList());
     }
 
-    public int getSalarySumOfDeparment(int departmentId){
+    public int getSalarySumOfDeparment(int departmentId) {
         return getEmployeesFromDepartment(departmentId).stream().mapToInt(Employee::getSalary).sum();
     }
 
     //public Map<Integer, List<Employee>> getEmployeesByDepartments(){---??
     //}
 
-    public int getMinSalarySumOfDeparment(int departmentId){
+    public int getMinSalarySumOfDeparment(int departmentId) {
         return getEmployeesFromDepartment(departmentId).stream().mapToInt(Employee::getDepartment).min().orElseThrow();
     }
 
-    public int getMaxSalarySumOfDeparment(int departmentId){
+    public int getMaxSalarySumOfDeparment(int departmentId) {
         return getEmployeesFromDepartment(departmentId).stream().mapToInt(Employee::getDepartment).max().orElseThrow();
     }
 }

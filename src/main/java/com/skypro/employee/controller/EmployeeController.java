@@ -13,34 +13,39 @@ import java.util.List;
 
 @RestController
 public class EmployeeController {
-    private  final EmployeeService employeeService;
+    private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService employeeService){
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
     @GetMapping("/employees")
-    public Collection<Employee> getAllEmployees(){
+    public Collection<Employee> getAllEmployees() {
         return this.employeeService.getAllEmployees();
     }
+
     @PostMapping("/employees")
-    public Employee createEmployee(@RequestBody EmployeeReqest employeeReqest){
+    public Employee createEmployee(@RequestBody EmployeeReqest employeeReqest) {
         return this.employeeService.addEmployee(employeeReqest);
     }
+
     @GetMapping("/employees/salary/sum")
-    public int getSalarySum(){
+    public int getSalarySum() {
         return this.employeeService.getSalarySum();
     }
+
     @GetMapping("/employees/salary/min")
-    public Employee findMinSalary(){
+    public Employee findMinSalary() {
         return this.employeeService.findMinSalary();
     }
+
     @GetMapping("/employees/salary/max")
-    public Employee findMaxSalary(){
+    public Employee findMaxSalary() {
         return this.employeeService.findMaxSalary();
     }
+
     @GetMapping("/employees/high-salary")
-    public List<Employee> findAverageSalary(){
+    public List<Employee> findAverageSalary() {
         return this.employeeService.findAverageSalary();
     }
 }

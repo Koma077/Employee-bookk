@@ -7,24 +7,15 @@ public class EmployeeReqest {
     private int salary;
     private double avgGrade;
 
-
-    public double getAvgGrade() {
-        return avgGrade;
-    }
-
-    public void setAvgGrade(double avgGrade) {
-        this.avgGrade = avgGrade;
-    }
-
-    public String getFirstName(String capitalize) {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName() {
         this.firstName = firstName;
     }
 
-    public String getLastName(String capitalize) {
+    public String getLastName() {
         return lastName;
     }
 
@@ -47,5 +38,13 @@ public class EmployeeReqest {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public double getAvgGrade() {
+        return avgGrade;
+    }
+
+    public void setAvgGrade(double avgGrade) {
+        this.avgGrade = avgGrade;
     }
 }

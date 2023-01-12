@@ -30,18 +30,18 @@ public class DepartmentBookAplicationTest {
 
     @BeforeEach
 
-    public void setUp(){
+    public void setUp() {
         Employee employee1 = new Employee("Alex", "Alexandrov", 1, 10000, 1);
         Employee employee2 = new Employee("Artur", "Arturov", 2, 20000, 2);
         Employee employee3 = new Employee("Max", "Maximov", 3, 30000, 3);
 
-        actualEmployee = new ArrayList<>(List.of(employee1,employee2,employee3));
+        actualEmployee = new ArrayList<>(List.of(employee1, employee2, employee3));
 
         when(employeeService.getAllEmployees()).thenReturn(actualEmployee);
     }
 
     @Test
-    public void shouldReturnExistingDepartments(){
+    public void shouldReturnExistingDepartments() {
         final Set<Integer> actual = actualEmployee.stream().map(Employee::getDepartment).collect(Collectors.toSet());
         final Set<Integer> expected = departmentService.getExistingDepartments();
 
@@ -49,14 +49,15 @@ public class DepartmentBookAplicationTest {
     }
 
     @Test
-    public void shouldReturnEmployessFromDepartments(){
+    public void shouldReturnEmployessFromDepartments() {
         final int departmentId = 1;
 
-        final List<Employee> aqctual = actualEmployee.stream().filter(e->e.getDepartment()==departmentId).collect(Collectors.toList());
+        final List<Employee> aqctual = actualEmployee.stream().filter(e -> e.getDepartment() == departmentId).collect(Collectors.toList());
         final List<Employee> expected = departmentService.getEmployeesFromDepartment(departmentId);
 
         assertEquals(aqctual, expected);
     }
+
     @Test
     public void shouldReturnSalarySumDepartments() {
         final int departmentId = 1;
@@ -72,10 +73,10 @@ public class DepartmentBookAplicationTest {
 //    }
 
     @Test
-    public void shouldReturnMinSalaryOfDepartments(){
+    public void shouldReturnMinSalaryOfDepartments() {
         final int department = 1;
 
-        final int actual = actualEmployee.stream().filter(e->e.getDepartment()== department).mapToInt(Employee::getSalary).min().orElse(0);
+        final int actual = actualEmployee.stream().filter(e -> e.getDepartment() == department).mapToInt(Employee::getSalary).min().orElse(0);
         final int expected = departmentService.getMinSalarySumOfDeparment(department);
 
         assertEquals(expected, actual);
@@ -87,17 +88,11 @@ public class DepartmentBookAplicationTest {
         final int department = 1;
 
         final int actual = actualEmployee.stream().filter(e -> e.getDepartment() == department).mapToInt(Employee::getSalary).max().orElse(0);
-        final int expected = departmentService.getMinSalarySumOfDeparment(department);
+        final int expected = departmentService.getMaxSalarySumOfDeparment(department);
 
         assertEquals(expected, actual);
 
     }
-
-
-
-
-
-
 
 
 }
